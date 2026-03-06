@@ -1,19 +1,57 @@
 body{
-font-family:Arial;
-width:250px;
-padding:10px;
-text-align:center;
+    font-family: Arial;
+    width: 300px;
+    padding: 15px;
+    background:#1e1e1e;
+    color:#e5e5e5;
+    text-align:center;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+.card{
+    background:#2b2b2b;
+    padding:15px;
+    border-radius:8px;
+}
+
+.label{
+    font-size:12px;
+    color:#a0a0a0;
+    margin-top:10px;
+}
+
+#url{
+    font-size:13px;
+    word-break:break-all;
 }
 
 button{
-padding:8px;
-background:#007bff;
-color:white;
-border:none;
-cursor:pointer;
+    margin-top:12px;
+    padding:8px 12px;
+    background:#3a3a3a;
+    border:none;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-#result{
-margin-top:10px;
-font-weight:bold;
+button:hover{
+    background:#505050;
+}
+
+.resultBox{
+    margin-top:15px;
+}
+
+.safe{
+    color:#4CAF50;
+    font-weight:bold;
+}
+
+.phishing{
+    color:#ff5252;
+    font-weight:bold;
 }

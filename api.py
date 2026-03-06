@@ -6,7 +6,6 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-app = Flask(__name__)
 
 # Load trained model
 with open("phishing_model.pkl", "rb") as f:

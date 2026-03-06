@@ -1,28 +1,67 @@
-document.getElementById("check").addEventListener("click", async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-let tabs = await chrome.tabs.query({active:true,currentWindow:true});
-let url = tabs[0].url;
+const result = document.getElementById("result");
+const urlText = document.getElementById("url");
+const scanButton = document.getElementById("check");
 
-document.getElementById("url").innerText = "URL: " + url;
+async function checkURL(url){
 
-let response = await fetch("http://127.0.0.1:5000/predict",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({url:url})
-});
+    try{
 
-let data = await response.json();
+        const response = await fetch("http://127.0.0.1:5000/predict",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({url})
+        });
 
-if(data.prediction === 1){
+        const data = await response.json();
 
-document.getElementById("result").innerText = "Phishing Website Detected";
+        if(data.prediction === 1){
 
-}else{
+            result.textContent = "PHISHING WEBSITE";
+            result.className = "phishing";
 
-document.getElementById("result").innerText = "Safe Website";
+        }else{
+
+            result.textContent = "SAFE WEBSITE";
+            result.className = "safe";
+
+        }
+
+    }catch(error){
+
+        result.textContent = "API ERROR";
+        result.className = "";
+
+    }
 
 }
+
+scanButton.addEventListener("click", async ()=>{
+
+    let tabs = await chrome.tabs.query({
+        active:true,
+        currentWindow:true
+    });
+
+    let url = tabs[0].url;
+
+    let domain = new URL(url).hostname;
+    urlText.textContent = domain;
+
+    if(url.startsWith("chrome://") || url.startsWith("brave://")){
+        result.textContent = "Cannot scan browser internal pages";
+        result.className = "";
+        return;
+    }
+
+    result.textContent = "Scanning...";
+    result.className = "";
+
+    checkURL(url);
+
+});
 
 });

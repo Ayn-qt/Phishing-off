@@ -3,9 +3,15 @@
   "name": "Phishing Detector",
   "version": "1.0",
   "description": "Detect phishing websites using machine learning",
-  "permissions": ["tabs", "activeTab"],
-  "host_permissions": ["http://127.0.0.1:5000/*"],
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*"
+  ],
   "action": {
     "default_popup": "popup.html"
   }
 }
+
